@@ -30,35 +30,35 @@ interface AnimatedCardProps {
     };
    
     return (
-       <motion.div
-         className="card"
-         layout
-         onClick={() => {
-           setIsExpaned(!isExpaned);
-         }}
-       >
-         <motion.h3 layout="position">{title}</motion.h3>
-         <motion.p layout="position">{content}</motion.p>
-         {isExpaned && (
-           <>
-             <motion.img {...animated} src={imageSrc} alt="demo image" />
-             <ul>
-               {expandedContent.map((item, index) => (
-                 <li key={index}>{item}</li>
-               ))}
-             </ul>
-             <motion.div {...animated} className="btn-container">
-               <motion.button
-                 onClick={() => {
-                   setIsExpaned(!isExpaned);
-                 }}
-               >
-                 Close
-               </motion.button>
-             </motion.div>
-           </>
-         )}
-       </motion.div>
-    );
+      <motion.div
+  className="card"
+  layout
+  onClick={() => {
+    setIsExpaned(!isExpaned); // Corrected here
+  }}
+>
+  <motion.h3 layout="position">{title}</motion.h3>
+  <motion.p layout="position">{content}</motion.p>
+  {isExpaned && (
+    <>
+      <motion.img src={imageSrc} alt="demo image" />
+      <ul>
+        {expandedContent.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+      <motion.div className="btn-container">
+        <motion.button
+          onClick={() => {
+            setIsExpaned(!isExpaned); // And here
+          }}
+        >
+          Close
+        </motion.button>
+      </motion.div>
+    </>
+  )}
+</motion.div>
+  );
    };
 export default AnimatedCard;

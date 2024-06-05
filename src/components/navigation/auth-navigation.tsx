@@ -5,7 +5,8 @@ import { StyledButton } from '@/components/styled-button'
 const AuthNavigation: FC = () => {
   return (
     <Box sx={{ '& button:first-child': { mr: 2 } }}>
-      <StyledButton disableHoverEffect={true}></StyledButton>
+      {/* Provide children to StyledButton */}
+      <StyledButton disableHoverEffect={true}>Login</StyledButton>
     </Box>
   )
 }

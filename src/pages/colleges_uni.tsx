@@ -5,10 +5,17 @@ import { coursesData } from './colleges_uni.data'; // Adjust the path as necessa
 import Link from 'next/link'; // Import Link for navigation
 
 // Define a simple card component
-const CourseCard = ({ photo, name, category, description }) => {
- // Split the description by courses and join them with commas and spaces
- const formattedDescription = description.join(', ');
+interface CourseCardProps {
+  photo: string;
+  name: string;
+  category: string;
+  description: string[];
+}
 
+const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, description }) => {
+  // Split the description by courses and join them with commas and spaces
+  const formattedDescription = description.join(', ');
+  
  return (
     <div
       style={{

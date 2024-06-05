@@ -8,7 +8,7 @@ import emailjs from 'emailjs-com'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 
-const HomeNewsLetter: FC = () => {
+const HomeNewsLetter = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,7 +41,7 @@ const HomeNewsLetter: FC = () => {
   }
 
   return (
-    showForm && (
+    showForm? (
       <Box sx={{ backgroundColor: 'background.paper', py: { xs: 8, md: 10 } }}>
         <Container maxWidth={false} sx={{ width: { xs: '100%', sm: '90%', md: '80%', lg: '70%', xl: '60%' } }}>
           <Box
@@ -157,8 +157,8 @@ const HomeNewsLetter: FC = () => {
           </Box>
         </Container>
       </Box>
-    )
-  )
-}
+    ) : null
+  );
+};
 
 export default HomeNewsLetter

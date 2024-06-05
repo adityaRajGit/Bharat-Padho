@@ -5,11 +5,19 @@ import { coursesData } from './law_colleges.data'; // Adjust the path as necessa
 import Link from 'next/link'; // Import Link for navigation
 import styles from './PopularCoursePage.module.css'; // Import the CSS module
 
-const CourseCard = ({ photo, name, category, state, description }) => {
+type CourseCardProps = {
+  photo: string; // Assuming photo is a URL string
+  name: string;
+  category: string;
+  state: string; // Assuming state is a string, adjust as necessary
+  description: string[];
+};
+
+const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, description }) => {
   const formattedDescription = description.join(', ');
   const [hasValidPhoto, setHasValidPhoto] = useState(false);
 
-  const checkPhotoValidity = async (url) => {
+  const checkPhotoValidity = async (url: string) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -61,17 +69,17 @@ const PopularCoursePage: React.FC = () => {
   const [sortedCourses, setSortedCourses] = useState(coursesData);
   const [sortMethod, setSortMethod] = useState('alphabetical'); // Default sort method
 
-  const sortCourses = (method) => {
-    let sortedList = [...coursesData];
+  const sortCourses = (method: string) => {
+    let sortedList = [...sortedCourses];
     switch (method) {
       case 'alphabetical':
-        sortedList.sort((a, b) => a.name.localeCompare(b.name)); // Direct comparison without state check
+        sortedList.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'category':
-        sortedList.sort((a, b) => a.category.localeCompare(b.category)); // Direct comparison without state check
+        sortedList.sort((a, b) => a.category.localeCompare(b.category));
         break;
       case 'state':
-        sortedList.sort((a, b) => a.state.localeCompare(b.state));
+        sortedList.sort((a, b) => a.state?.localeCompare(b.state?? 'zzz') || 0);
         break;
       default:
         break;
@@ -168,16 +176,16 @@ const PopularCoursePage: React.FC = () => {
         </button>
       </div>
       <div className={styles.gridContainer}>
-        {sortedCourses.map((course, index) => (
-          <CourseCard
-            key={`${course.name}-${index}`}
-            photo={course.photo}
-            name={course.name}
-            category={course.category}
-            state={course.state}
-            description={course.description}
-          />
-        ))}
+      {sortedCourses.map((course, index) => (
+        <CourseCard
+          key={`${course.name}-${index}`}
+          photo={course.photo || 'default_image_url_here'}
+          name={course.name}
+          category={course.category}
+          state={course.state?? 'Unknown'} // Fallback to 'Unknown' if state is undefined
+          description={course.description}
+        />
+      ))}
       </div>
       <Footer />
     </div>
