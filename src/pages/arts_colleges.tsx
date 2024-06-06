@@ -1,40 +1,40 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
-import { coursesData } from './arts_colleges.data';
-import Image from 'next/image'; // Updated to use Image from 'next/image'
-import styles from './PopularCoursePage.module.css';
+import React, { useState, useEffect, useCallback } from 'react'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { coursesData } from '../data/arts_colleges.data'
+import Image from 'next/image' // Updated to use Image from 'next/image'
+import styles from './PopularCoursePage.module.css'
 
 type CourseCardProps = {
-  photo: string; // Assuming photo is a URL string
-  name: string;
-  category: string;
-  state: string; // Assuming state is a string, adjust as necessary
-  description: string[];
-};
+  photo: string // Assuming photo is a URL string
+  name: string
+  category: string
+  state: string // Assuming state is a string, adjust as necessary
+  description: string[]
+}
 
 const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, description }) => {
-  const formattedDescription = description.join(', ');
-  const [hasValidPhoto, setHasValidPhoto] = useState(false);
+  const formattedDescription = description.join(', ')
+  const [hasValidPhoto, setHasValidPhoto] = useState(false)
 
   const checkPhotoValidity = async (url: string): Promise<void> => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(url)
       if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
+        throw new Error(`HTTP error status: ${response.status}`)
       }
-      setHasValidPhoto(true);
+      setHasValidPhoto(true)
     } catch (error) {
-      console.error("Failed to fetch photo:", error);
-      setHasValidPhoto(false);
+      console.error('Failed to fetch photo:', error)
+      setHasValidPhoto(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (photo) {
-      checkPhotoValidity(photo);
+      checkPhotoValidity(photo)
     }
-  }, [photo]);
+  }, [photo])
 
   return (
     <div
@@ -60,38 +60,47 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
         />
       )}
       <h2>{name}</h2>
-      <p><strong>City:</strong> {category}</p>
-      <p><strong>State:</strong> {state}</p>
-      <p><strong>Courses Offered:</strong> {formattedDescription}</p>
+      <p>
+        <strong>City:</strong> {category}
+      </p>
+      <p>
+        <strong>State:</strong> {state}
+      </p>
+      <p>
+        <strong>Courses Offered:</strong> {formattedDescription}
+      </p>
     </div>
-  );
-};
+  )
+}
 
 const PopularCoursePage: React.FC = () => {
-  const [sortedCourses, setSortedCourses] = useState(coursesData);
-  const [sortMethod, setSortMethod] = useState('alphabetical'); // Default sort method
+  const [sortedCourses, setSortedCourses] = useState(coursesData)
+  const [sortMethod, setSortMethod] = useState('alphabetical') // Default sort method
 
-  const sortCourses = useCallback((method: string): void => {
-    const sortedList = [...sortedCourses]; // Use sortedCourses state instead of coursesData directly
-    switch (method) {
-      case 'alphabetical':
-        sortedList.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'category':
-        sortedList.sort((a, b) => a.category.localeCompare(b.category));
-        break;
-      case 'state':
-        sortedList.sort((a, b) => a.state.localeCompare(b.state));
-        break;
-      default:
-        break;
-    }
-    setSortedCourses(sortedList); // Correctly use setSortedCourses to update the state
-  }, [sortedCourses]);
+  const sortCourses = useCallback(
+    (method: string): void => {
+      const sortedList = [...sortedCourses] // Use sortedCourses state instead of coursesData directly
+      switch (method) {
+        case 'alphabetical':
+          sortedList.sort((a, b) => a.name.localeCompare(b.name))
+          break
+        case 'category':
+          sortedList.sort((a, b) => a.category.localeCompare(b.category))
+          break
+        case 'state':
+          sortedList.sort((a, b) => a.state.localeCompare(b.state))
+          break
+        default:
+          break
+      }
+      setSortedCourses(sortedList) // Correctly use setSortedCourses to update the state
+    },
+    [sortedCourses]
+  )
 
   useEffect(() => {
-    sortCourses(sortMethod); // Initial sort based on sortMethod state
-  }, [sortMethod, sortCourses]);
+    sortCourses(sortMethod) // Initial sort based on sortMethod state
+  }, [sortMethod, sortCourses])
 
   return (
     <div
@@ -191,7 +200,7 @@ const PopularCoursePage: React.FC = () => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default PopularCoursePage;
+export default PopularCoursePage

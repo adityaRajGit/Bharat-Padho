@@ -1,5 +1,11 @@
 import { Description } from '@mui/icons-material'
-
+export type CourseData = {
+  photo:string;
+  name: string;
+  category: string;
+  state: string;
+  description: string[];
+};
 export const coursesData = [
   {
     "photo": "https://www.aiims.edu/images/com_fwgallery/files/806/aiims-central-lawn.JPG",

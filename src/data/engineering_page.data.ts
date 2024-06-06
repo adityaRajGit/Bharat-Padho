@@ -1,7 +1,14 @@
 import { Description } from '@mui/icons-material'
 
-export const coursesData = 
-[
+export type CourseData = {
+  photo:string;
+  name: string;
+  category: string;
+  state: string;
+  description: string[];
+};
+
+export const coursesData: CourseData[] = [
   {
     "photo": "https://images.unsplash.com/photo-1581319751935-537a3ed76558?q=80&w=1841&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "name": "Birla Institute of Technology and Science, Pilani - Goa Campus",

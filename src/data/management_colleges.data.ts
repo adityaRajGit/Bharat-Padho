@@ -1,6 +1,14 @@
 import { Description } from '@mui/icons-material'
 
-export const coursesData = [
+export type CourseData = {
+  photo?:string;
+  name: string;
+  category: string;
+  state: string;
+  description: string[];
+};
+
+export const coursesData: CourseData[] = [
   {
     "name": "Maharaja Agrasen Institute of Management and Technology, Yamuna Nagar",
     "category": "Yamuna Nagar",
@@ -32,70 +40,60 @@ export const coursesData = [
     "description": ["UG Diploma", "BHM", "BBA", "MBA/PGDM"]
   },
   {
-    "photo": "xlri-xavier-logo.jpg",
     "name": "XLRI Xavier School of Management",
     "category": "Jamshedpur",
     "state": "Jharkhand",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "mdi-logo.jpg",
     "name": "Management Development Institute",
     "category": "Gurugram",
     "state": "Haryana",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "spjimr-logo.jpg",
     "name": "S.P. Jain Institute of Management and Research, Mumbai",
     "category": "Mumbai",
     "state": "Maharashtra",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "amity-noida-logo.jpg",
     "name": "Amity University, Noida",
     "category": "Noida",
     "state": "Uttar Pradesh",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "great-lakes-chennai-logo.jpg",
     "name": "Great Lakes Institute of Management, Chennai",
     "category": "Chennai",
     "state": "Tamil Nadu",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "lpu-logo.jpg",
     "name": "LPU - Lovely Professional University",
     "category": "Punjab",
     "state": "Punjab",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "gim-logo.jpg",
     "name": "GIM - Goa Institute of Management",
     "category": "Goa",
     "state": "Goa",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "imi-delhi-logo.jpg",
     "name": "International Management Institute, New Delhi",
     "category": "New Delhi",
     "state": "Delhi",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "chandigarh-university-logo.jpg",
     "name": "Chandigarh University (CU)",
     "category": "Chandigarh",
     "state": "Punjab",
     "description": ["MBA", "Ph.D."]
   },
   {
-    "photo": "mica-logo.jpg",
     "name": "MICA",
     "category": "Ahmedabad",
     "state": "Gujarat",

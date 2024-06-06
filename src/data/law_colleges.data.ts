@@ -1,5 +1,11 @@
 import { Description } from '@mui/icons-material'
-
+export type CourseData = {
+  photo?:string;
+  name: string;
+  category: string;
+  state: string;
+  description: string[];
+};
 export const coursesData = [
   {
     "name": "A.K.K. New Law Academy and Ph.D. (Law) Research Centre, Pune",
@@ -291,113 +297,57 @@ export const coursesData = [
   "description": ["LL.B.", "B.A. LL.B.", "B.L.S. LL.B."]
 },
 {
-  "photo": "soa-university-logo.jpg",
   "name": "SOA University - Siksha 'O' Anusandhan",
   "category": "Odisha",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "MBBS",
-      "MD",
-      "MS",
-      "BDS",
-      "MDS"
-  ]
+  "state": "Odisha",
+  "description": ["B.Tech", "M.Tech", "MBA", "MBBS", "MD", "MS", "BDS", "MDS"]
 },
 {
-  "photo": "saveetha-institute-logo.jpg",
   "name": "Saveetha Institute of Medical and Technical Sciences, Poonamallee",
   "category": "Tamil Nadu",
-  "description": [
-      "MBBS",
-      "BDS",
-      "B.Tech",
-      "M.Tech",
-      "Ph.D."
-  ]
+  "state": "Tamil Nadu",
+  "description": ["MBBS", "BDS", "B.Tech", "M.Tech", "Ph.D."]
 },
 {
-  "photo": "kiit-logo.jpg",
   "name": "KIIT - Kalinga Institute of Industrial Technology",
   "category": "Odisha",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "Ph.D."
-  ]
+  "state": "Odisha",
+  "description": ["B.Tech", "M.Tech", "MBA", "Ph.D."]
 },
 {
-  "photo": "christ-university-logo.jpg",
   "name": "Christ University",
   "category": "Bangalore",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "Ph.D."
-  ]
+  "state": "Karnataka",
+  "description": ["B.Tech", "M.Tech", "MBA", "Ph.D."]
 },
 {
-  "photo": "sastra-logo.jpg",
   "name": "School of Law, SASTRA",
   "category": "Thanjavur",
-  "description": [
-      "BA LLB",
-      "BBA LLB",
-      "LLM"
-  ]
+  "state": "Tamil Nadu",
+  "description": ["BA LLB", "BBA LLB", "LLM"]
 },
 {
-  "photo": "lpu-logo.jpg",
   "name": "LPU - Lovely Professional University",
   "category": "Punjab",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "MBBS",
-      "BDS",
-      "B.Sc.",
-      "M.Sc.",
-      "Ph.D."
-  ]
+  "state": "Punjab",
+  "description": ["B.Tech", "M.Tech", "MBA", "MBBS", "BDS", "B.Sc.", "M.Sc.", "Ph.D."]
 },
 {
-  "photo": "amity-gurugram-logo.jpg",
   "name": "Amity University, Gurugram",
   "category": "Gurugram",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "Ph.D."
-  ]
+  "state": "Haryana",
+  "description": ["B.Tech", "M.Tech", "MBA", "Ph.D."]
 },
 {
-  "photo": "alliance-university-logo.jpg",
   "name": "Alliance School of Law, Alliance University",
   "category": "Bangalore",
-  "description": [
-      "BA LLB",
-      "BBA LLB",
-      "LLM"
-  ]
+  "state": "Karnataka",
+  "description": ["BA LLB", "BBA LLB", "LLM"]
 },
 {
-  "photo": "manipal-jaipur-logo.jpg",
   "name": "Manipal University, Jaipur",
   "category": "Jaipur",
-  "description": [
-      "B.Tech",
-      "M.Tech",
-      "MBA",
-      "MBBS",
-      "BDS",
-      "B.Sc.",
-      "M.Sc.",
-      "Ph.D."
-  ]
+  "state": "Rajasthan",
+  "description": ["B.Tech", "M.Tech", "MBA", "MBBS", "BDS", "B.Sc.", "M.Sc.", "Ph.D."]
 }
 ]
