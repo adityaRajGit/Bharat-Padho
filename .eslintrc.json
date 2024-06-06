@@ -17,11 +17,6 @@
     "prefer-const": "error",
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": true }],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "@typescript-eslint/no-unused-vars": "off", // Disable unused vars rule
-    "@typescript-eslint/no-empty-interface": "off", // Disable empty interfaces
-    "@typescript-eslint/no-inferrable-types": "off", // Disable inferrable types
-    "@typescript-eslint/no-useless-type-assertion": "off", // Disable useless type assertions
-    "react-hooks/exhaustive-deps": "warn" // Warn instead of error for missing deps in useEffect
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }]
   }
 }

@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
 import Particles from 'react-tsparticles';
 
-interface ParticleProps {
- // Define any props here if needed
-}
-
-const Particle: FC<ParticleProps> = () => {
- return (
+const Particle: FC = () => {
+  return (
     <Particles
       id="tsparticles"
       params={{
@@ -23,7 +19,7 @@ const Particle: FC<ParticleProps> = () => {
             opacity: 0.03,
           },
           move: {
-            direction: "right",
+            direction: 'right',
             speed: 0.05,
           },
           size: {
@@ -41,7 +37,7 @@ const Particle: FC<ParticleProps> = () => {
           events: {
             onclick: {
               enable: true,
-              mode: "push",
+              mode: 'push',
             },
           },
           modes: {
@@ -53,7 +49,7 @@ const Particle: FC<ParticleProps> = () => {
         retina_detect: true,
       }}
     />
- );
-}
+  );
+};
 
 export default Particle;

@@ -19,14 +19,21 @@ export const headerVariants = {
   },
 }
 
-export const slideIn = (direction: string, type: string, delay: number, duration: number) => ({
+
+
+export const slideIn = (
+  direction: string,
+  type: string,
+  delay: number,
+  duration: number
+): { hidden: { x: string; y: string }; show: { x: string; y: string; transition: { type: string; delay: number; duration: number; ease: string } } } => ({
   hidden: {
-    x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
-    y: direction === 'up' ? '100%' : direction === 'down' ? '100%' : 0,
+    x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : '0', // Ensure x is always a string
+    y: direction === 'up' ? '100%' : direction === 'down' ? '100%' : '0', // Ensure y is always a string
   },
   show: {
-    x: 0,
-    y: 0,
+    x: '0', // Ensure x is always a string
+    y: '0', // Ensure y is always a string
     transition: {
       type,
       delay,
@@ -34,9 +41,12 @@ export const slideIn = (direction: string, type: string, delay: number, duration
       ease: 'easeOut',
     },
   },
-})
+});
 
-export const staggerContainer = (staggerChildren: number, delayChildren: number) => ({
+export const staggerContainer = (
+  staggerChildren: number,
+  delayChildren: number
+): { hidden: Record<string, unknown>; show: { transition: { staggerChildren: number; delayChildren: number } } } => ({
   hidden: {},
   show: {
     transition: {
@@ -44,9 +54,22 @@ export const staggerContainer = (staggerChildren: number, delayChildren: number)
       delayChildren,
     },
   },
-})
+});
 
-export const textVariant = (delay: number) => ({
+type TextVariantReturnType = {
+  hidden: { y: number; opacity: number };
+  show: {
+    y: number;
+    opacity: number;
+    transition: {
+      type: string;
+      duration: number;
+      delay: number;
+    };
+  };
+};
+
+export const textVariant = (delay: number): TextVariantReturnType => ({
   hidden: {
     y: 50,
     opacity: 0,
@@ -60,15 +83,15 @@ export const textVariant = (delay: number) => ({
       delay,
     },
   },
-})
+});
 
 export const textContainer = {
   hidden: {
     opacity: 0,
   },
-  show: (i: number = 1) => ({
+  show: () => ({
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: i * 0.1 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   }),
 }
 
@@ -87,7 +110,26 @@ export const textVariant2 = {
   },
 }
 
-export const fadeIn = (direction: string, type: string, delay: number, duration: number) => ({
+type FadeInReturnType = {
+  hidden: {
+    x: number;
+    y: number;
+    opacity: number;
+  };
+  show: {
+    x: number;
+    y: number;
+    opacity: number;
+    transition: {
+      type: string;
+      delay: number;
+      duration: number;
+      ease: string;
+    };
+  };
+};
+
+export const fadeIn = (direction: string, type: string, delay: number, duration: number): FadeInReturnType => ({
   hidden: {
     x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
     y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
@@ -104,9 +146,25 @@ export const fadeIn = (direction: string, type: string, delay: number, duration:
       ease: 'easeOut',
     },
   },
-})
+});
 
-export const planetVariants = (direction: string) => ({
+type PlanetVariantsReturnType = {
+  hidden: {
+    x: string;
+    rotate: number;
+  };
+  show: {
+    x: number;
+    rotate: number;
+    transition: {
+      type: string;
+      duration: number;
+      delay: number;
+    };
+  };
+};
+
+export const planetVariants = (direction: string): PlanetVariantsReturnType => ({
   hidden: {
     x: direction === 'left' ? '-100%' : '100%',
     rotate: 120,
@@ -120,9 +178,26 @@ export const planetVariants = (direction: string) => ({
       delay: 0.5,
     },
   },
-})
+});
 
-export const zoomIn = (delay: number, duration: number) => ({
+type ZoomInReturnType = {
+  hidden: {
+    scale: number;
+    opacity: number;
+  };
+  show: {
+    scale: number;
+    opacity: number;
+    transition: {
+      type: string;
+      delay: number;
+      duration: number;
+      ease: string;
+    };
+  };
+};
+
+export const zoomIn = (delay: number, duration: number): ZoomInReturnType => ({
   hidden: {
     scale: 0,
     opacity: 0,
@@ -137,7 +212,8 @@ export const zoomIn = (delay: number, duration: number) => ({
       ease: 'easeOut',
     },
   },
-})
+});
+
 
 export const footerVariants = {
   hidden: {
@@ -162,17 +238,14 @@ export const footerVariants = {
 
 export const draw = {
   hidden: { pathLength: 0, opacity: 0 },
-  visible: (i: number) => {
-    const delay = 1.5
-    return {
-      pathLength: 1,
-      opacity: 1,
-      transition: {
-        pathLength: { delay, type: 'spring', duration: 5, bounce: 0 },
-        opacity: { delay, duration: 0.01 },
-      },
-    }
-  },
+  visible: () => ({
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      pathLength: { delay: 1.5, type: 'spring', duration: 5, bounce: 0 },
+      opacity: { delay: 1.5, duration: 0.01 },
+    },
+  }),
 }
 
 export const staggerChildren = {
@@ -190,9 +263,9 @@ export const listItem = {
   show: { opacity: 1 },
 }
 
-export const getMenuStyles = (menuOpened: boolean) => {
+export const getMenuStyles = (menuOpened: boolean): Record<string, string> | undefined => {
   if (document.documentElement.clientWidth <= 640) {
-    console.log('outside of sidebar reached')
-    return { right: !menuOpened && '-100%' }
+    console.log('outside of sidebar reached');
+    return !menuOpened ? { right: '-100%' } : undefined;
   }
-}
+};

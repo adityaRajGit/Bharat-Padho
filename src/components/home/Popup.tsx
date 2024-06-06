@@ -1,4 +1,3 @@
-// PopUp.tsx
 import React, { FC } from 'react';
 import Modal from '@mui/material/Modal';
 import HomeNewsLetter from './newsletter_popup';
@@ -9,7 +8,7 @@ interface PopUpProps {
 }
 
 const PopUp: FC<PopUpProps> = ({ open, onClose }) => {
-  const handleClose = () => {
+  const handleClose = (): void => {
     onClose();
   };
 

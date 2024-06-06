@@ -1,11 +1,9 @@
-import React from 'react'
-import { Container, Row, Col } from "react-bootstrap";
-import Particle from '../components/Particle';
+import React from 'react';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 import Hero from '../components/about_us/about';
-import { Footer } from '@/components/footer'
-import { Header } from '@/components/header'
 
-const about_us = () => {
+const AboutUs: React.FC = () => {
   return (
     <div
       style={{
@@ -21,4 +19,4 @@ const about_us = () => {
   );
 }
 
-export default about_us
+export default AboutUs;

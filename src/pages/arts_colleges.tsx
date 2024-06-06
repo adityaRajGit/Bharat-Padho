@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
-import { coursesData } from './arts_colleges.data'; 
-import Link from 'next/link'; 
-import styles from './PopularCoursePage.module.css'; 
+import { coursesData } from './arts_colleges.data';
+import Image from 'next/image'; // Updated to use Image from 'next/image'
+import styles from './PopularCoursePage.module.css';
 
 type CourseCardProps = {
   photo: string; // Assuming photo is a URL string
@@ -17,7 +17,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
   const formattedDescription = description.join(', ');
   const [hasValidPhoto, setHasValidPhoto] = useState(false);
 
-  const checkPhotoValidity = async (url: string) => {
+  const checkPhotoValidity = async (url: string): Promise<void> => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -29,7 +29,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
       setHasValidPhoto(false);
     }
   };
-  
+
   useEffect(() => {
     if (photo) {
       checkPhotoValidity(photo);
@@ -48,12 +48,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
         backgroundColor: '#FFE8D3',
       }}
     >
-      {hasValidPhoto? (
-        <img src={photo} alt={name} style={{ width: '100%', height: 'auto' }} />
+      {hasValidPhoto ? (
+        <Image src={photo} alt={name} width={500} height={300} style={{ width: '100%', height: 'auto' }} />
       ) : (
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Default"
+          width={500}
+          height={300}
           style={{ width: '100%', height: 'auto' }}
         />
       )}
@@ -69,8 +71,8 @@ const PopularCoursePage: React.FC = () => {
   const [sortedCourses, setSortedCourses] = useState(coursesData);
   const [sortMethod, setSortMethod] = useState('alphabetical'); // Default sort method
 
-  const sortCourses = (method: string) => {
-    let sortedList = [...sortedCourses]; // Use sortedCourses state instead of coursesData directly
+  const sortCourses = useCallback((method: string): void => {
+    const sortedList = [...sortedCourses]; // Use sortedCourses state instead of coursesData directly
     switch (method) {
       case 'alphabetical':
         sortedList.sort((a, b) => a.name.localeCompare(b.name));
@@ -85,11 +87,11 @@ const PopularCoursePage: React.FC = () => {
         break;
     }
     setSortedCourses(sortedList); // Correctly use setSortedCourses to update the state
-  };
+  }, [sortedCourses]);
 
   useEffect(() => {
     sortCourses(sortMethod); // Initial sort based on sortMethod state
-  }, [sortMethod]);
+  }, [sortMethod, sortCourses]);
 
   return (
     <div

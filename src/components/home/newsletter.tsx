@@ -1,28 +1,34 @@
-import React, { FC, useState } from 'react'
-import Box from '@mui/material/Box'
-import InputBase from '@mui/material/InputBase'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { StyledButton } from '../styled-button'
-import emailjs from 'emailjs-com'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
+import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
+import Box from '@mui/material/Box';
+import InputBase from '@mui/material/InputBase';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { StyledButton } from '../styled-button';
+import emailjs from 'emailjs-com';
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
 const HomeNewsLetter: FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     subject: '',
     message: '',
-  })
+  });
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
     const templateParams = {
       to_name: 'Recipient Name', // Replace with the recipient's name
@@ -31,16 +37,16 @@ const HomeNewsLetter: FC = () => {
       phone: formData.phone,
       subject: formData.subject,
       message: formData.message,
-    }
+    };
 
     emailjs.send('service_exfx5g9', 'template_6gjl4ti', templateParams, 'QIxRddgPHhkvr4yLf').then(
       (result) => {
-        console.log(result.text)
+        console.log(result.text);
       },
       (error) => {
-        console.log(error.text)
+        console.log(error.text);
       }
-    )
+    );
 
     // Clear form data after submission
     setFormData({
@@ -49,8 +55,8 @@ const HomeNewsLetter: FC = () => {
       phone: '',
       subject: '',
       message: '',
-    })
-  }
+    });
+  };
 
   return (
     <Box sx={{ backgroundColor: 'background.paper', py: { xs: 8, md: 10 } }}>
@@ -156,7 +162,7 @@ const HomeNewsLetter: FC = () => {
         </Box>
       </Container>
     </Box>
-  )
-}
+  );
+};
 
-export default HomeNewsLetter
+export default HomeNewsLetter;

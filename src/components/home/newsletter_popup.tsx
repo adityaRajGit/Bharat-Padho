@@ -1,47 +1,63 @@
-import React, { FC, useState } from 'react'
-import Box from '@mui/material/Box'
-import InputBase from '@mui/material/InputBase'
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
-import { StyledButton } from '../styled-button'
-import emailjs from 'emailjs-com'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import Box from '@mui/material/Box';
+import InputBase from '@mui/material/InputBase';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { StyledButton } from '../styled-button';
+import emailjs from 'emailjs-com';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
-const HomeNewsLetter = () => {
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+const HomeNewsLetter: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     subject: '',
     message: '',
-  })
+  });
 
-  const [showForm, setShowForm] = useState(true) // State to control form visibility
+  const [showForm, setShowForm] = useState<boolean>(true); // State to control form visibility
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-    emailjs.sendForm('service_exfx5g9', 'template_6gjl4ti', e.target, 'QIxRddgPHhkvr4yLf').then(
+    emailjs.sendForm('service_exfx5g9', 'template_6gjl4ti', e.currentTarget, 'QIxRddgPHhkvr4yLf').then(
       (result) => {
-        console.log(result.text)
+        console.log(result.text);
       },
       (error) => {
-        console.log(error.text)
+        console.log(error.text);
       }
-    )
-  }
+    );
 
-  const handleClose = () => {
-    setShowForm(false) // Close the form
-  }
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+    });
+  };
+
+  const handleClose = (): void => {
+    setShowForm(false); // Close the form
+  };
 
   return (
-    showForm? (
+    showForm ? (
       <Box sx={{ backgroundColor: 'background.paper', py: { xs: 8, md: 10 } }}>
         <Container maxWidth={false} sx={{ width: { xs: '100%', sm: '90%', md: '80%', lg: '70%', xl: '60%' } }}>
           <Box
@@ -161,4 +177,4 @@ const HomeNewsLetter = () => {
   );
 };
 
-export default HomeNewsLetter
+export default HomeNewsLetter;

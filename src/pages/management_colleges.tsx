@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { coursesData } from './management_colleges.data'; // Adjust the path as necessary
-import Link from 'next/link'; // Import Link for navigation
 import styles from './PopularCoursePage.module.css'; // Import the CSS module
+import Image from 'next/image'; // Import Image from next/image
 
 type CourseCardProps = {
   photo: string; // Assuming photo is a URL string
@@ -17,7 +17,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
   const formattedDescription = description.join(', ');
   const [hasValidPhoto, setHasValidPhoto] = useState(false);
 
-  const checkPhotoValidity = async (url: string) => {
+  const checkPhotoValidity = async (url: string): Promise<void> => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -48,13 +48,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ photo, name, category, state, d
         backgroundColor: '#FFE8D3',
       }}
     >
-      {hasValidPhoto? (
-        <img src={photo} alt={name} style={{ width: '100%', height: 'auto' }} />
+      {hasValidPhoto ? (
+        <Image src={photo} alt={name} width={500} height={300} />
       ) : (
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Default"
-          style={{ width: '100%', height: 'auto' }}
+          width={500}
+          height={300}
         />
       )}
       <h2>{name}</h2>
@@ -69,8 +70,8 @@ const PopularCoursePage: React.FC = () => {
   const [sortedCourses, setSortedCourses] = useState(coursesData);
   const [sortMethod, setSortMethod] = useState('alphabetical'); // Default sort method
 
-  const sortCourses = (method: string) => {
-    let sortedList = [...sortedCourses]; // Use sortedCourses state instead of coursesData directly
+  const sortCourses = useCallback((method: string): void => {
+    const sortedList = [...sortedCourses];
     switch (method) {
       case 'alphabetical':
         sortedList.sort((a, b) => a.name.localeCompare(b.name));
@@ -84,12 +85,12 @@ const PopularCoursePage: React.FC = () => {
       default:
         break;
     }
-    setSortedCourses(sortedList); // Correctly use setSortedCourses to update the state
-  };
+    setSortedCourses(sortedList);
+  }, [sortedCourses]);
 
   useEffect(() => {
     sortCourses(sortMethod); // Initial sort based on sortMethod state
-  }, [sortMethod]);
+  }, [sortMethod, sortCourses]);
 
   return (
     <div
@@ -176,17 +177,16 @@ const PopularCoursePage: React.FC = () => {
         </button>
       </div>
       <div className={styles.gridContainer}>
-      {sortedCourses.map((course, index) => (
-  <CourseCard
-    key={`${course.name}-${index}`}
-    photo={course.photo || 'default_image_url_here'}
-    name={course.name}
-    category={course.category}
-    state={course.state?? 'Unknown'} // Fallback to 'Unknown' if state is undefined
-    description={course.description}
-  />
-))}
-
+        {sortedCourses.map((course, index) => (
+          <CourseCard
+            key={`${course.name}-${index}`}
+            photo={course.photo || 'default_image_url_here'}
+            name={course.name}
+            category={course.category}
+            state={course.state ?? 'Unknown'} // Fallback to 'Unknown' if state is undefined
+            description={course.description}
+          />
+        ))}
       </div>
       <Footer />
     </div>

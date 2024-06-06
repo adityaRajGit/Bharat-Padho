@@ -3,7 +3,7 @@ import AnimatedCard from '@/components/cards/animated_cards'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div
       style={{
