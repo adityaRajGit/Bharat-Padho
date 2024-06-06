@@ -8,6 +8,7 @@ import { createEmotionCache } from '@/utils'
 import createEmotionServer from '@emotion/server/create-instance'
 import { AppContextType, AppPropsType } from 'next/dist/shared/lib/utils'
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 interface DocumentProps {
   emotionStylesTags: any[]
@@ -43,6 +44,7 @@ class MyDocument extends Document<DocumentProps> {
         <body>
           <Main />
           <NextScript />
+          <SpeedInsights/>
         </body>
       </Html>
     )
