@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick.css'
 import '@/styles/globals.css'
 import '@/styles/react-slick.css'
 import { NextPageWithLayout } from '@/interfaces/layout'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 // import 'slick-carousel/slick/slick-theme.css'
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -31,6 +31,10 @@ const App: FC<AppPropsWithLayout> = (props: AppPropsWithLayout) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta
+          name="description"
+          content="Elevate your educational journey with our team of dedicated consultants, providing tailored advice and support to navigate the complexities of academia, empowering you to make informed decisions and achieve your academic goals with confidence and clarity."
+        />
         <title>BharatPadho</title>
       </Head>
       <MUIProvider>
